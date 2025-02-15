@@ -1,2 +1,2 @@
-# MatrixOps_C
-Performs various operations on matrices. Designed for Linear Algebra.
+# Linear Algebra Operations
+Performs various operations on matrices and vectors. Designed for Linear Algebra.
