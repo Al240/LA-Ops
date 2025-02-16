@@ -13,12 +13,12 @@ typedef struct { // 3D Vector associated with a label
     double** entries;
 } Matrix;
 
-Matrix getMatrix(void); // User definition of a matrix
-int ddRank(double matA); // det(A), Dim(A), and Rank(A)
-int mAddSub(double matA, double matB); // [A] +/- [B]
-int mMult(double matA, double matB); // [A][B]
-int mNull(double matA); // Null(A), [A]x=[0]
-int mSolve(double matA); // Augmented matrix solving, [A]x=[B]
-int mEigen(double matA); // Eigenvalue and vector calculation
+Matrix* newMatrix(int mRow, int nCol, int udef); // Creates a new matrix of size mRowxnCol
+int mDisp(Matrix *matA); // Display matrix
+int mRREF(Matrix *matA); // Row-reduced echelon form
+int mDim(Matrix matA); // Dim(A)
+int mAddSub(Matrix matA, Matrix matB); // [A] +/- [B]
+int mMult(Matrix matA, Matrix matB); // [A][B]
+int mDet(Matrix matA); // det(A), currently limited to matrices up to 3x3
 
 #endif

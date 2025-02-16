@@ -37,14 +37,15 @@ Vect getVector(void) { // Allows user to define a vector
     v1.x = comps[0];
     v1.y = comps[1];
     v1.z = comps[2];
-    printf("Vector %c: <%.4f, %.4f, %.4f>\n\n", v1.label, v1.x, v1.y, v1.z);
+    printf("\nVector %c: <%.4f, %.4f, %.4f>\n\n", v1.label, v1.x, v1.y, v1.z);
     return v1;
 }
 
 int getMagUnit(Vect v1) { // Magnitude + unit vector calculation
     double vMag = sqrt((v1.x*v1.x)+(v1.y*v1.y)+(v1.z*v1.z));
-    printf("Magnitude ||%c||: %.4f\n", v1.label, vMag);
-    printf("Unit Vector v/||v||: <%.4f, %.4f, %.4f>\n\n", v1.x/vMag, v1.y/vMag, v1.z/vMag);
+    printf("\nMagnitude ||%c||: %.4f\n", v1.label, vMag);
+    printf("Unit Vector v/||v||: <%.4f, %.4f, %.4f>\n", v1.x/vMag, v1.y/vMag, v1.z/vMag);
+    return 0;
 }
 
 int vAddSub(Vect v1, Vect v2) { // Addition and subtraction, v1 +/- v2
@@ -57,12 +58,12 @@ int vAddSub(Vect v1, Vect v2) { // Addition and subtraction, v1 +/- v2
         switch (opChoice) {
             // Addition
             case '+' : case 'A' : case 'a' :
-                printf("\nA + B = <%.4f, %.4f, %.4f>\n\n", (v1.x + v2.x), (v1.y + v2.y), (v1.z + v2.z));
+                printf("\nA + B = <%.4f, %.4f, %.4f>\n", (v1.x + v2.x), (v1.y + v2.y), (v1.z + v2.z));
                 inProgress = 0;
                 break;
             // Subtraction
             case '-' : case 'S' : case 's' :
-                printf("\nA - B = <%.4f, %.4f, %.4f>\n\n", (v1.x - v2.x), (v1.y - v2.y), (v1.z - v2.z));
+                printf("\nA - B = <%.4f, %.4f, %.4f>\n", (v1.x - v2.x), (v1.y - v2.y), (v1.z - v2.z));
                 inProgress = 0;
                 break;
 
@@ -77,7 +78,7 @@ int vAddSub(Vect v1, Vect v2) { // Addition and subtraction, v1 +/- v2
 
 int dotProduct(Vect v1, Vect v2) { // Dot product, v1 • v2
     double dProduct = (v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z); // (a1b1)+(a2b2)+(a3b3)
-    printf("A • B = %.4f\n\n", dProduct); // Display final dot product
+    printf("\nA . B = %.4f\n", dProduct); // Display final dot product
     return 0;
 }
 
@@ -86,7 +87,7 @@ int crossProduct(Vect v1, Vect v2) { // Cross product, v1 x v2
     cProd.x = (v1.y * v2.z-v1.z * v2.y);
     cProd.y = (v1.z * v2.x-v1.x * v2.z);
     cProd.z = (v1.x * v2.y-v1.y * v2.x); 
-    cProd.label = 'AxB'; // <a2b3-a3b2,a3b1-a1b3,a1b2-a2b1>
+    cProd.label = 'C'; // <a2b3-a3b2,a3b1-a1b3,a1b2-a2b1>
 
     printf("\nWork Shown:\n"); // Display 2 steps in detail
     printf("A x B = <(%.4f)(%.4f) - (%.4f)(%.4f), (%.4f)(%.4f) - (%.4f)(%.4f), (%.4f)(%.4f) - (%.4f)(%.4f)>", // 1. plug in values
@@ -98,6 +99,6 @@ int crossProduct(Vect v1, Vect v2) { // Cross product, v1 x v2
         v1.z * v2.x, v1.x * v2.z,
         v1.x * v2.y, v1.y * v2.x);
     printf("\nFinal Answer:");
-    printf("\nA x B = <%.4f, %.4f, %.4f>\n\n", cProd.x, cProd.y, cProd.z);
+    printf("\nA x B = <%.4f, %.4f, %.4f>\n", cProd.x, cProd.y, cProd.z);
     return 0;
 }
