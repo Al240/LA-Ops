@@ -20,4 +20,4 @@ matrix.o: matrix.h matrix.c
 	$(CC) $(CFLAGS) matrix.c -o matrix.o
 
 LA-Ops_v1.1.exe: vectors.o matrix.o main.c
-	$(CC) $(LFLAGS) vectors.o matrix.o main.c -o LA-Ops_v1.1.exe
+	$(CC) $(LFLAGS) vectors.o matrix.o main.c -o ./version/LA-Ops_v1.1.exe

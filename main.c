@@ -13,7 +13,7 @@ ver.    Date        Changelog
 void MainMenu(void) {
     printf("\n\n-------------------------\n");
     printf("\nLINEAR ALGEBRA OPERATIONS\n");
-    printf("v1.0\n\n");
+    printf("v1.1\n\n");
     printf("(V)ectors only\n");
     printf("(M)atrices\n");
     printf("(Q)uit Program\n");
@@ -129,14 +129,11 @@ int main(void) {
                             char mRREFChoice;
                             printf("Perform this on matrix A or B? ");
                             scanf(" %c", &mRREFChoice);
-                            Matrix mR;
                             if (mRREFChoice == 'A') {
-                                mR = mA;
-                                mRREF(&mR);
+                                mRREF(&mA);
                             }
                             else if (mRREFChoice == 'B') {
-                                mR = mB;
-                                mRREF(&mR);
+                                mRREF(&mB);
                             }
                             break;
 
@@ -145,14 +142,11 @@ int main(void) {
                             char mDimChoice;
                             printf("Perform this on matrix A or B? ");
                             scanf(" %c", &mDimChoice);
-                            Matrix mDimm;
                             if (mDimChoice == 'A') {
-                                mDimm = mA;
-                                mDim(mDimm);
+                                mDim(mA);
                             }
                             else if (mDimChoice == 'B') {
-                                mDimm = mB;
-                                mDim(mDimm);
+                                mDim(mB);
                             }
                             break;
 
