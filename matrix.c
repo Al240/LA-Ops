@@ -2,6 +2,7 @@
 Written by: Al240 // 2/14/2025
 
 ver.    Date        Changelog
+1.2     2/20/2025   [AL] Added support for augmented matrix solver
 1.1     2/15/2025   [AL] Fixed some input (looping behavior) and display bugs
 1.0     2/14/2025   [AL] Initial code */
 
@@ -76,7 +77,7 @@ int mDisp(Matrix *matA) {
     return 0;
 } // Show matrix
 
-int mRREF (Matrix *matA) {
+int mRREF (Matrix * matA) {
     int i, j, k;
     
     for (i = 0; i < matA->rows; i++) {
@@ -220,7 +221,7 @@ int mAddSub(Matrix matA, Matrix matB) {
 
 int mMult(Matrix matA, Matrix matB) {
     if ((matA.rows != matB.columns) || (matA.columns != matB.rows)) {
-        printf("ERROR: Unsupported matrices. To multiply A and B, A must be of size mxn while B is nxm.\n");
+        printf("ERROR: Unsupported matrices. To multiply A and B, A must be of size m x n while B is n x m.\n");
         return 2;
     }
     else {
@@ -243,3 +244,52 @@ int mMult(Matrix matA, Matrix matB) {
         return 0;
     }
 } // [A][B]
+
+int mSolver(Matrix matA, Matrix vecB) {
+    if (vecB.rows > 1) {
+        printf("ERROR: Second matrix B is NOT a valid vector (more than 1 column)!\n");
+    }
+    else {
+        Matrix* Aug = newMatrix(matA.rows+1, matA.columns, 0);
+        for (int r=0; r<matA.rows-1; r++) {
+            for (int c=0; c<matA.columns; c++) {
+                Aug->entries[r][c] = matA.entries[r][c]; // Initialize augmented matrix w/ [A]
+            }
+        }
+
+        for (int augC=0; augC<Aug->columns; augC++) {
+            Aug->entries[matA.rows+1][augC] = vecB.entries[augC][0]; // Initialize B in augmented matrix
+        }
+
+        printf("Solution (after RREF): \n");
+        mRREF(Aug);
+    }
+    return 0;
+} // Ax=B
+
+int mEigen(Matrix matA) {
+    printf("Note: This function is still in beta and currently only supports up to 3x3 matrices.\n");
+    if (matA.columns != matA.rows) {
+        printf("ERROR: Input matrix must be a square (nxn) matrix!\n");
+        return 1;
+    }
+    else {
+        if (matA.rows > 3) {
+            printf("ERROR: Eigenvalue solver currently supports up to 3x3 matrices.\n");
+            return 1;
+        }
+        else {
+            if (matA.rows == 2) {
+                double e1 = (matA.entries[0][0]+matA.entries[1][1]) + sqrt(pow(matA.entries[0][0]+matA.entries[1][1], 2)+(4*(matA.entries[0][0]*matA.entries[1][1] - matA.entries[0][1]*matA.entries[1][0])));
+                double e2 = (matA.entries[0][0]+matA.entries[1][1]) - sqrt(pow(matA.entries[0][0]+matA.entries[1][1], 2)+(4*(matA.entries[0][0]*matA.entries[1][1] - matA.entries[0][1]*matA.entries[1][0])));
+
+                printf("\nEigenvalues: %.4f, %.4f\n", e1, e2);
+            }
+            else if (matA.rows == 3) {
+                // 3x3
+                printf("3x3 Coming soon!\n");
+            }
+        }
+    }
+    return 0;
+} // Eigenvalue solver

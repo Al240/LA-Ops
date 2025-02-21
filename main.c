@@ -2,8 +2,9 @@
 By: Al240 // 2/13/2025
 
 ver.    Date        Changelog
-1.1     2/14/2025   Menus written (fixed input bug), implemented vector stuff
-1.0     2/13/2025   Initial commit, combines matrix.c and vectorProduct.c
+1.2     2/20/2025   [AL] Added matrix display option, augmented matrix solver, and eigenvalue solver (beta)
+1.1     2/14/2025   [AL] Menus written (fixed input bug), implemented vector stuff
+1.0     2/13/2025   [AL] Initial commit, combines matrix.c and vectorProduct.c
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -32,11 +33,14 @@ void VectorMenu(void) {
 
 void MatrixMenu(void) {
     printf("\n\nMATRIX OPERATIONS MENU\n");
+    printf("(0) Display Inputted Matrix\n");
     printf("(1) Row-Reduced Echelon Form (RREF)\n");
-    printf("(2) Dimension\n");
-    printf("(3) Addition and Subtraction\n");
-    printf("(4) Multiplication\n");
-    printf("(5) Determinant\n");
+    printf("(2) Augmented Matrix Solver\n");
+    printf("(3) Dimension\n");
+    printf("(4) Addition and Subtraction\n");
+    printf("(5) Multiplication\n");
+    printf("(6) Determinant (up to 3x3)\n");
+    printf("(7) EXPERIMENTAL: Eigenvalues\n");
     printf("(R)eturn to main menu\n");
     printf("Choose an option: ");
 }
@@ -125,6 +129,11 @@ int main(void) {
                     MatrixMenu();
                     scanf(" %c", &matChoice);
                     switch (matChoice) {
+                        case '0': // Show matrix
+                            printf("Current matrix A: \n");
+                            mDisp(&mA);
+                            break;
+
                         case '1': // RREF(A)
                             char mRREFChoice;
                             printf("Perform this on matrix A or B? ");
@@ -137,7 +146,15 @@ int main(void) {
                             }
                             break;
 
-                        case '2': // Dim(A)
+                        case '2': // Solver
+                            printf("Define the augmented part of the matrix (the B in Ax=B): \n");
+                            Matrix* AugB = newMatrix(mA.rows, 1, 1);
+                            Matrix mD = *AugB; 
+                            printf("\nNow solving Ax=B...\n");
+                            mSolver(mA, mD);
+                            break;
+
+                        case '3': // Dim(A)
                             while ((getchar()) != '\n') {} // clear input buffer
                             char mDimChoice;
                             printf("Perform this on matrix A or B? ");
@@ -150,21 +167,34 @@ int main(void) {
                             }
                             break;
 
-                        case '3': // A+B
+                        case '4': // A+B
                             mAddSub(mA, mB);
                             break;
 
-                        case '4': // AxB
+                        case '5': // AxB
                             mMult(mA, mB);
                             break;
 
-                        case '5': // det(A)
+                        case '6': // det(A)
                             while ((getchar()) != '\n') {} // clear input buffer
                             char mDetChoice;
                             printf("Perform this on matrix A or B? ");
                             scanf(" %c", &mDetChoice);
                             if (mDetChoice == 'A') mDet(mA);
                             else if (mDetChoice == 'B') mDet(mB);
+                            break;
+
+                        case '7': // Eigenvalue solver
+                            while ((getchar()) != '\n') {} // clear input buffer
+                            char mEigenChoice;
+                            printf("Perform this on matrix A or B? ");
+                            scanf(" %c", &mEigenChoice);
+                            if (mDimChoice == 'A') {
+                                mEigen(mA);
+                            }
+                            else if (mDimChoice == 'B') {
+                                mEigen(mB);
+                            }
                             break;
 
                         case 'R': case 'r': // Return to main menu
