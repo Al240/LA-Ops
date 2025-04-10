@@ -18,6 +18,9 @@ Originally made for a friend taking Linear Algebra.
 - Multiplication
 - Determinant (2x2 and 3x3 only)
 
+#### Releases
+Download the .exe in the releases tab.
+
 #### Things Coming Soon:
 I'll implement these features if I have time in the future.
 - Scaling Matrices (next update)
